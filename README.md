@@ -62,3 +62,4 @@ curl -X POST http://localhost:8080/api/enrollments -H "Content-Type: application
 
 - This repository was prepared for incremental commits per lab instructions. I will create small, meaningful commits for each required feature (README, enrollment date, prerequisite validation, retrieval by student name, and Azerbaijani Swagger descriptions). Commit messages will be in English.
 - To push commits to GitHub run `git push origin main` after each commit (or the branch you use).
+
