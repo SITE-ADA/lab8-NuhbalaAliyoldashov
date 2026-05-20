@@ -28,32 +28,32 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-    @Operation(summary = "Create student", description = "Creates a new student record.")
+    @Operation(summary = "Tələbə yaradın", description = "Yeni tələbə qeydiyyatı yaradır.")
     public ResponseEntity<StudentResponseDto> createStudent(@Valid @RequestBody StudentRequestDto requestDto) {
         StudentResponseDto createdStudent = studentService.createStudent(requestDto);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @Operation(summary = "Get all students", description = "Returns all students.")
+    @Operation(summary = "Bütün tələbələri alın", description = "Bütün tələbələri qaytarır.")
     public ResponseEntity<List<StudentResponseDto>> getAllStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     @GetMapping("/search")
-    @Operation(summary = "Search students by name", description = "Search students by first or last name.")
+    @Operation(summary = "Ada görə tələbələri axtarın", description = "Tələbələri ad və soyad üzrə axtarır.")
     public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(@org.springframework.web.bind.annotation.RequestParam("name") String name) {
         return ResponseEntity.ok(studentService.getStudentsByName(name));
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get student by id", description = "Returns a single student by id.")
+    @Operation(summary = "Tələbəni id ilə alın", description = "Verilmiş id-li tələbəni qaytarır.")
     public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update student", description = "Updates an existing student by id.")
+    @Operation(summary = "Tələbəni yeniləyin", description = "Verilmiş id-li tələbəni yeniləyir.")
     public ResponseEntity<StudentResponseDto> updateStudent(
             @PathVariable Long id,
             @Valid @RequestBody StudentRequestDto requestDto) {
@@ -61,7 +61,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete student", description = "Deletes a student by id.")
+    @Operation(summary = "Tələbəni silin", description = "Verilmiş id-li tələbəni silir.")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();

@@ -30,26 +30,26 @@ public class CourseController {
     private final CourseService courseService;
 
     @PostMapping
-    @Operation(summary = "Create course", description = "Creates a new course.")
+    @Operation(summary = "Kurs yaradın", description = "Yeni kurs yaradır.")
     public ResponseEntity<CourseResponseDto> createCourse(@Valid @RequestBody CourseRequestDto requestDto) {
         CourseResponseDto createdCourse = courseService.createCourse(requestDto);
         return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @Operation(summary = "Get all courses", description = "Returns all courses.")
+    @Operation(summary = "Bütün kursları alın", description = "Bütün kursları qaytarır.")
     public ResponseEntity<List<CourseResponseDto>> getAllCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get course by id", description = "Returns a single course by id.")
+    @Operation(summary = "Kursu id ilə alın", description = "Verilmiş id üzrə kursu qaytarır.")
     public ResponseEntity<CourseResponseDto> getCourseById(@PathVariable Long id) {
         return ResponseEntity.ok(courseService.getCourseById(id));
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update course", description = "Updates a course by id.")
+    @Operation(summary = "Kursu yeniləyin", description = "Verilmiş id-li kursu yeniləyir.")
     public ResponseEntity<CourseResponseDto> updateCourse(
             @PathVariable Long id,
             @Valid @RequestBody CourseRequestDto requestDto) {
@@ -57,7 +57,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete course", description = "Deletes a course by id.")
+    @Operation(summary = "Kursu silin", description = "Verilmiş id-li kursu silir.")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();
@@ -65,8 +65,8 @@ public class CourseController {
 
     @PostMapping("/{courseId}/students/{studentId}")
     @Operation(
-            summary = "Enroll student",
-            description = "Enrolls a student into a course after validating the student via Feign client."
+            summary = "Tələbəni qeydiyyata alın",
+            description = "Tələbəni kursa qeydiyyata alır və tələbə xidmətindən yoxlayır."
     )
     public ResponseEntity<EnrollmentResponseDto> enrollStudent(
             @PathVariable Long courseId,
@@ -77,15 +77,15 @@ public class CourseController {
 
     @GetMapping("/{courseId}/students")
     @Operation(
-            summary = "List course students",
-            description = "Returns detailed student data by calling student-service through RestTemplate."
+            summary = "Kurs tələbələrini siyahıla",
+            description = "Kursdakı tələbələri tələbə xidmətindən məlumatları ilə qaytarır."
     )
     public ResponseEntity<CourseStudentsResponseDto> getCourseStudents(@PathVariable Long courseId) {
         return ResponseEntity.ok(courseService.getCourseStudents(courseId));
     }
 
     @GetMapping("/by-student-name")
-    @Operation(summary = "Get courses by student name", description = "Returns courses for students matching provided name.")
+    @Operation(summary = "Tələbə adına görə kursları alın", description = "Verilmiş ada uyğun tələbələrin kurslarını qaytarır.")
     public ResponseEntity<List<CourseResponseDto>> getCoursesByStudentName(@org.springframework.web.bind.annotation.RequestParam("name") String name) {
         return ResponseEntity.ok(courseService.getCoursesByStudentName(name));
     }
